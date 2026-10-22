@@ -1,0 +1,37 @@
+
+# Environment variables and private configuration
+.env
+.env.*
+!.env.example
+
+# Dependencies
+/vendor/
+/node_modules/
+
+# Logs and temporary files
+*.log
+logs/
+tmp/
+temp/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Local backups and database exports
+*.bak
+*.backup
+*.old
+*.tmp
+
+# Uploaded files: review individually before publishing
+# Keep the directory placeholder, but exclude uploaded content.
+assets/uploads/*
+!assets/uploads/.gitkeep

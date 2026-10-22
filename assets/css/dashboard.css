@@ -1,0 +1,160 @@
+/* =====================================================================
+   dashboard.css — Styling for the secure management portal
+   ===================================================================== */
+
+.portal-body { background-color: var(--color-bg); }
+.portal-wrapper { display: flex; min-height: 100vh; }
+
+/* ---------- Sidebar ---------- */
+.portal-sidebar {
+  width: 250px;
+  max-width: 82vw;
+  flex-shrink: 0;
+  background-color: var(--color-primary-dark);
+  color: #f1e9da;
+  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+}
+.sidebar-brand {
+  padding: 1.25rem 1.25rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.sidebar-role-badge {
+  display: inline-block;
+  background-color: var(--color-secondary);
+  color: var(--color-primary-dark);
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.sidebar-close {
+  background: none;
+  border: none;
+  color: #f1e9da;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 0.25rem 0.35rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+.sidebar-close:hover { background-color: rgba(255,255,255,0.1); color: #fff; }
+.sidebar-nav { list-style: none; margin: 0; padding: 0.75rem 0; }
+.sidebar-nav li a {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.65rem 1.25rem;
+  color: #d9cdb8;
+  font-size: 0.92rem;
+  border-left: 3px solid transparent;
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+.sidebar-nav li a:hover { background-color: rgba(255,255,255,0.06); color: #fff; }
+.sidebar-nav li.active a {
+  background-color: rgba(255,255,255,0.08);
+  border-left-color: var(--color-secondary);
+  color: #fff;
+  font-weight: 600;
+}
+.sidebar-logout { margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem; }
+
+/* Off-canvas overlay backdrop, shown only while the mobile sidebar is open */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(20, 14, 8, 0.45);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+.sidebar-overlay.show { display: block; opacity: 1; }
+
+/* ---------- Main area ---------- */
+.portal-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.portal-topbar {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: sticky; top: 0; z-index: 10;
+}
+.portal-page-title {
+  font-size: 1.15rem;
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.portal-user { display: flex; align-items: center; gap: 0.5rem; color: var(--color-text-muted); flex-shrink: 0; }
+.sidebar-toggle { background: none; border: none; font-size: 1.4rem; color: var(--color-primary); flex-shrink: 0; }
+.portal-content { padding: 1.5rem; flex: 1; }
+
+@media (max-width: 991.98px) {
+  .portal-sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    height: 100vh;
+    min-height: 0;
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+    z-index: 1000;
+  }
+  .portal-sidebar.open { transform: translateX(0); }
+}
+
+@media (max-width: 575.98px) {
+  .portal-topbar { padding: 0.75rem 1rem; }
+  .portal-content { padding: 1rem; }
+  .portal-username { display: none; }
+  .portal-content .card.p-3 { padding: 0.9rem !important; }
+  .portal-content .card.p-4 { padding: 1rem !important; }
+  .stat-value { font-size: 1.3rem; }
+}
+
+body.sidebar-open { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-sidebar, .sidebar-overlay { transition-duration: 0.01ms !important; }
+}
+
+
+/* ---------- Dashboard summary cards ---------- */
+.stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+  height: 100%;
+}
+.stat-icon {
+  width: 48px; height: 48px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  background-color: rgba(var(--color-primary-rgb), 0.08);
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.stat-value { font-size: 1.5rem; font-weight: 700; color: var(--color-primary); line-height: 1.1; }
+.stat-label { color: var(--color-text-muted); font-size: 0.85rem; }
+
+/* ---------- Forms & tables inside portal ---------- */
+.portal-content .card { margin-bottom: 1.25rem; }
+.portal-content .form-label { font-weight: 600; font-size: 0.9rem; }
+.required-mark { color: var(--color-danger); }
