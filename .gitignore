@@ -35,3 +35,4 @@ desktop.ini
 # Keep the directory placeholder, but exclude uploaded content.
 assets/uploads/*
 !assets/uploads/.gitkeep
+/database/school_management.sql
